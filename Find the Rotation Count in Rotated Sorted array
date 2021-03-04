@@ -1,37 +1,28 @@
 //Find the Rotation Count in Rotated Sorted array
 import java.util.*;
 // no of times a sorted array rotated
+import java.util.*;
 public class BinarySearch 
 {
-	static int countRotations(int arr[], int low, int high) 
-    { 
- 
-        if (high < low) 
-           return 0; 
-        
-        if (high == low) 
-           return low; 
-        
-        int mid = low + (high - low)/2;  
-        
-        if (mid < high && arr[mid+1] < arr[mid]) 
-           return (mid + 1);
-        
-        if (mid > low && arr[mid] < arr[mid - 1]) 
-           return mid; 
-        
-        if (arr[high] > arr[mid]) 
-           return countRotations(arr, low, mid - 1); 
-
-        return countRotations(arr, mid + 1, high);  
-    }  
-	public static int binarysearch(int arr[])
+	public static int find_min(int arr[])
 	{
-		return countRotations(arr, 0,arr.length-1);
+		int low = 0;
+		int high = arr.length-1;
+		while(low<high)
+		{
+			int mid = low+(high-low)/2;
+			
+			if(arr[high]>arr[mid])
+				high=mid;
+			else
+				low=mid+1;
+		}
+		return high;
 	}
 	public static void main(String[] args) 
 	{
-		int arr[] = {11,12,15,18,2,5,6,8};
-		System.out.println(binarysearch(arr));
+		int arr[] = {15, 18, 2, 3, 6, 12};
+		System.out.println(find_min(arr));
 	}
+	
 }
